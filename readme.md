@@ -16,6 +16,7 @@ Usage
 ------------------
 
 CTRL + SHIFT + d : toggle task completed
+CTRL + SGIFT + c : toggle task as current
 
 
 Samples 
