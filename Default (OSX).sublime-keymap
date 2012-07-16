@@ -1,4 +1,4 @@
 [	// iTodo plugin
 	{ "keys": ["ctrl+shift+d"], "command": "complete" },
-	{ "keys": ["ctrl+shift+c"], "command": "current"},
+	{ "keys": ["ctrl+shift+c"], "command": "current" },
 ]

@@ -30,8 +30,8 @@ class CompleteCommand(ItodoBase):
       line_head = self.view.find("[-\+\*]", line.begin())
       line_contents = self.view.substr(line).strip()
       # prepend @done if item is ongoing
-      if line_contents.startswith('-'):
-        self.view.insert(edit, line.end(), " @done (%s)" % datetime.now().strftime("%Y-%m-%d %H:%M")
+      if line_contents.startswith('-') or line_contents.startswith('*'):
+        self.view.insert(edit, line.end(), " @done (%s)" % datetime.now().strftime("%Y-%m-%d %H:%M"))
         self.view.replace(edit, line_head, "+")
       # undo @todo
       elif line_contents.startswith('+'):
@@ -43,13 +43,13 @@ class CurrentCommand(ItodoBase):
   def runCommand(self, edit):
     for region in self.view.sel():
       line = self.view.line(region)
-      line_head = self.view.find("[-\+]", line.begin())
+      line_head = self.view.find("[-\+\*]", line.begin())
       line_contents = self.view.substr(line).strip()
       # prepend @started for current task
       if line_contents.startswith("-"):
-        self.view.insert(edit, line.end(), " @started (%s)" % datetime.now().strftime("%Y-%m-%d %H:%M")
+        self.view.insert(edit, line.end(), " @started (%s)" % datetime.now().strftime("%Y-%m-%d %H:%M"))
         self.view.replace(edit, line_head, "*")
       elif line_contents.startswith("*"):
-        subfix = self.view.find("(\s)*@done(.)+\)$", line.begin())
+        subfix = self.view.find("(\s)*@started(.)+\)$", line.begin())
         self.view.erase(edit, subfix)
         self.view.replace(edit, line_head, "-")
