@@ -43,7 +43,7 @@ class CurrentCommand(ItodoBase):
   def runCommand(self, edit):
     for region in self.view.sel():
       line = self.view.line(region)
-      line_head = self.view.find("[-\+\*]", line.begin())
+      line_head = self.view.find("[-\*]", line.begin())
       line_contents = self.view.substr(line).strip()
       # prepend @started for current task
       if line_contents.startswith("-"):
